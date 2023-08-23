@@ -1,0 +1,21 @@
+body{
+                                  background-color: yellow;
+}
+.neymarfeliz{
+                                  width: 100px;
+                                  height: 100px;
+                                  justify-content: center;
+                                  }
+.energía{
+display: flex; 
+flex: 1;
+padding: 70px;
+}
+#game               {
+                                  width: 400px;
+                                  height: 400px;
+                                  position: relative;
+                              }
+                              .neymar-triste{
+display: none
+                              }
