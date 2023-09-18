@@ -1,4 +1,4 @@
-//clase del pow
+// Clase del Pou
 class Pou {
   constructor() {
     this.energia = 100;
@@ -14,6 +14,7 @@ class Pou {
   getSueno() {
     return this.sueno;
   }
+
   correr() {
     const energiaConsumida = this.energiaMax * 0.25;
     if (this.energia >= energiaConsumida) {
@@ -24,6 +25,7 @@ class Pou {
       return "Estoy cansado jefe, no puedo correr";
     }
   }
+
   dormir() {
     if (this.sueno === 0) {
       return "¡Ya dormí mucho!";
@@ -48,26 +50,44 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function refrescar() {
-  document.getElementById("energia").textContent = pou.getEnergia();
+  document.getElementById("energia").textContent = pou.getEnergia() + "%";
   document.getElementById("sueno").textContent = pou.getSueno();
-  if (pou.getEnergia() >=25 ){
-    document.getElementById("neymarTristeContainer").style.display="none";
-    document.getElementById("neymar-felis-container").style.display="flex";
+  if (pou.getEnergia() >= 25) {
+    document.getElementById("neymarTristeContainer").style.display = "none";
+    document.getElementById("neymar-felis-container").style.display = "flex";
+  } else {
+    document.getElementById("neymarTristeContainer").style.display = "flex";
+    document.getElementById("neymar-felis-container").style.display = "none";
   }
-  else{
-    document.getElementById("neymarTristeContainer").style.display="flex";
-    document.getElementById("neymar-felis-container").style.display="none";
-  }
-  }
-    
+}
 
-//función correr
+// Función para correr
 function correr() {
   alert(pou.correr());
   refrescar();
 }
-//función dormir
+
+// Función para dormir
 function dormir() {
   alert(pou.dormir());
   refrescar();
+}
+
+// Función para obtener un número entero aleatorio entre min (inclusive) y max (exclusivo)
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min) + min);
+}
+
+function enviar() {
+  var numeroIngresado = parseInt(document.getElementById("numero").value);
+  var numeroAleatorio = getRandomInt(0, 101);
+
+  if (numeroIngresado === numeroAleatorio) {
+    alert("¡Correcto! ¡Adivinaste el número!");
+  } else {
+    alert("¡Incorrecto! El número era " + numeroAleatorio);
+    console.log(numeroAleatorio);
+  }
 }
