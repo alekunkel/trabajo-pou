@@ -21,5 +21,12 @@ padding: 70px;
                                   position: relative;
                               }
                               .neymar-triste{
-display: none
+                                width: 100px;
+                                height: 100px;
+                                justify-content: center;
+                                 margin: 20px; /* Margen alrededor de la imagen */
+                                  display: block; /* Elimina el espacio debajo de la imagen */
+                                  border: 2px solid #ccc; /* Grosor y color del borde */
+                                  border-radius: 10px; /* Radio de los bordes redondeados */
                               }
+                              

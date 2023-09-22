@@ -1,3 +1,4 @@
+// Clase del Pou
 class Pou {
   constructor() {
     this.energia = 100;
@@ -49,21 +50,67 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function refrescar() {
-  document.getElementById("energia").textContent = pou.getEnergia();
+  document.getElementById("energia").textContent = pou.getEnergia() + "%";
   document.getElementById("sueno").textContent = pou.getSueno();
-  if (pou.getEnergia() > 80) {
+  if (pou.getEnergia() >= 25) {
     document.getElementById("neymarTristeContainer").style.display = "none";
+    document.getElementById("neymar-felis-container").style.display = "flex";
   } else {
-    document.getElementById("neymarTristeContainer").style.display = "block";
+    document.getElementById("neymarTristeContainer").style.display = "flex";
+    document.getElementById("neymar-felis-container").style.display = "none";
   }
 }
 
+// Función para correr
 function correr() {
   alert(pou.correr());
   refrescar();
 }
 
+// Función para dormir
 function dormir() {
   alert(pou.dormir());
   refrescar();
 }
+
+// Función para obtener un número entero aleatorio entre min (inclusive) y max (exclusivo)
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min) + min);
+  }
+// ...
+
+let pulsacionesBoton = 0;
+const limitePulsaciones = 3;
+
+document.addEventListener("DOMContentLoaded", function () {
+  const botonEnviar = document.getElementById("enviar");
+
+  botonEnviar.addEventListener("click", function () {
+    var numeroIngresado = parseInt(document.getElementById("numero").value);
+    var numeroAleatorio = getRandomInt(0, 101);
+
+    if (pulsacionesBoton < limitePulsaciones) {
+      pulsacionesBoton++;
+      botonEnviar.textContent = `Enviar (Límite: ${limitePulsaciones - pulsacionesBoton})`;
+
+      if (numeroIngresado === numeroAleatorio) {
+        alert("¡Correcto! ¡Adivinaste el número!");
+      } else {
+        alert("¡Incorrecto! El número era " + numeroAleatorio);
+        console.log(numeroAleatorio);
+      }
+
+      // Limpia el valor del campo de entrada
+      const numero = document.getElementById("numero");
+      numero.value = "";
+
+      // Verifica si se alcanzó el límite de pulsaciones
+      if (pulsacionesBoton >= limitePulsaciones) {
+        botonEnviar.disabled = true;
+        alert("¡No te quedan más intentos!");
+      }
+    }
+  });
+});
