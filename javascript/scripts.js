@@ -72,24 +72,23 @@ function dormir() {
   alert(pou.dormir());
   refrescar();
 }
-
 // Función para obtener un número entero aleatorio entre min (inclusive) y max (exclusivo)
 function getRandomInt(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min) + min);
-  }
-// ...
-
-let pulsacionesBoton = 0;
-const limitePulsaciones = 3;
+}
 
 document.addEventListener("DOMContentLoaded", function () {
   const botonEnviar = document.getElementById("enviar");
+  const botonReiniciar = document.getElementById("reiniciar");
+  let numeroAleatorio = getRandomInt(0, 101); // Genera el número aleatorio al cargar la página 
+
+  let pulsacionesBoton = 0;
+  const limitePulsaciones = 3;
 
   botonEnviar.addEventListener("click", function () {
     var numeroIngresado = parseInt(document.getElementById("numero").value);
-    var numeroAleatorio = getRandomInt(0, 101);
 
     if (pulsacionesBoton < limitePulsaciones) {
       pulsacionesBoton++;
@@ -97,8 +96,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (numeroIngresado === numeroAleatorio) {
         alert("¡Correcto! ¡Adivinaste el número!");
+        botonEnviar.disabled = true; // Deshabilita el botón después de adivinar
+        botonReiniciar.style.display = "block"; // Muestra el botón de reinicio
       } else {
-        alert("¡Incorrecto! El número era " + numeroAleatorio);
+        alert("Incorrecto, ¡inténtalo de nuevo! ");
         console.log(numeroAleatorio);
       }
 
@@ -109,8 +110,18 @@ document.addEventListener("DOMContentLoaded", function () {
       // Verifica si se alcanzó el límite de pulsaciones
       if (pulsacionesBoton >= limitePulsaciones) {
         botonEnviar.disabled = true;
-        alert("¡No te quedan más intentos!");
+        botonReiniciar.style.display = "block"; // Muestra el botón de reinicio
+        alert(`¡No te quedan más intentos! El número correcto era ${numeroAleatorio}.`);
       }
     }
+  });
+
+  botonReiniciar.addEventListener("click", function () {
+    // Reinicia el juego
+    pulsacionesBoton = 0;
+    botonEnviar.disabled = false;
+    botonReiniciar.style.display = "none"; // Oculta el botón de reinicio
+    botonEnviar.textContent = "Enviar";
+    numeroAleatorio = getRandomInt(0, 101); // Genera un nuevo número aleatorio
   });
 });
